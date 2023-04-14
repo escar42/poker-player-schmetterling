@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "Schmetter 0.0.5"
+    VERSION = "Schmetter 0.0.6"
 
     def betRequest(self, game_state):
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
@@ -22,6 +22,13 @@ class Player:
             if sum(other_card["rank"] == card["rank"] for other_card in cards + game_state["community_cards"]) == 2:
                 two_pairs.append(card["rank"])
 
+        # Check if there is a triple
+        triple_rank = None
+        for card in cards + game_state["community_cards"]:
+            if sum(other_card["rank"] == card["rank"] for other_card in cards + game_state["community_cards"]) == 3:
+                triple_rank = card["rank"]
+                break
+
         if flush_suit:
             if card1["suit"] == flush_suit and card2["suit"] == flush_suit:
                 return game_state["players"][game_state["in_action"]]["stack"]
@@ -29,6 +36,13 @@ class Player:
                 return 0
         elif len(two_pairs) > 1:
             return game_state["players"][game_state["in_action"]]["stack"]
+        elif triple_rank:
+            if triple_rank in [card1["rank"], card2["rank"]]:
+                return 2 * game_state["current_buy_in"]
+            elif game_state["current_buy_in"] <= 50:
+                return 2 * game_state["current_buy_in"]
+            else:
+                return 0
         elif len(comcards_suits) <= 2:
             if game_state["current_buy_in"] > 300:
                 return 0
