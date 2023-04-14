@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "Zerschmetterling 1.2"
+    VERSION = "Kuckuck ihr Lauser 1.3"
 
     def betRequest(self, game_state):
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
@@ -86,6 +86,8 @@ class Player:
                 return 2 * game_state["current_buy_in"]
             else:
                 return 0
+        elif game_state["current_buy_in"] <= 50:
+                return 2 * game_state["current_buy_in"]
         elif len(comcards_suits) <= 2:
             if game_state["current_buy_in"] > 300:
                 return 0
