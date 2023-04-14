@@ -13,7 +13,13 @@ class Player:
             comcards_suits.append(comcard["suit"])
             comcards_ranks.append(comcard["rank"])
 
-            
+        # Check if there is a pair
+        pair_rank = None
+        for card in cards + game_state["community_cards"]:
+            if sum(other_card["rank"] == card["rank"] for other_card in cards + game_state["community_cards"]) == 2:
+                pair_rank = card["rank"]
+                break
+
         #straight
         def checkRank(rank):
             if rank == "J":
@@ -62,7 +68,11 @@ class Player:
             if sum(other_card["rank"] == card["rank"] for other_card in cards + game_state["community_cards"]) == 3:
                 triple_rank = card["rank"]
                 break
-
+        if pair_rank:
+            if pair_rank in [card1["rank"], card2["rank"]]:
+                return (game_state["current_buy_in"] - game_state["players"][game_state["in_action"]]["bet"]) + 100
+            else:
+                return 0
         if flush_suit:
             if card1["suit"] == flush_suit and card2["suit"] == flush_suit:
                 return 3 * game_state["current_buy_in"]
