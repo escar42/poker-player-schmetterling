@@ -34,7 +34,7 @@ class Player:
            
         strightlist.sort()
         for i in range(5):
-            if strightlist[i+1] == int(strightlist[i]) + 1:
+            if int(strightlist[i+1]) == int(strightlist[i]) + 1:
                 pass
             else:
                 break
