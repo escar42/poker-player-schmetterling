@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "Schmetter 0.0.4"
+    VERSION = "Schmetter 0.0.5"
 
     def betRequest(self, game_state):
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
