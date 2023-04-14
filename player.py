@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "Zerschmetterling 1.0.1"
+    VERSION = "Zerschmetterling 1.2"
 
     def betRequest(self, game_state):
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
@@ -20,37 +20,30 @@ class Player:
                 pair_rank = card["rank"]
                 break
 
-       # straight
+        # Straight
         def checkRank(rank):
-            if rank == "J":
-                rank = 11
-            if rank == "Q":
-                rank = 12
-            if rank == "K":
-                rank = 13
-            if rank == "A":
-                rank = 14
-            return int(rank)
-            
-            
-  
-        strightlist = []
-        strightlist.append(checkRank(card1["rank"]))
-        strightlist.append(checkRank(card2["rank"]))
-        if len(strightlist) > 2:
-            for comcard_rank in comcards_ranks:
-                strightlist.append(checkRank(comcard_rank))
+            if rank in ["J", "Q", "K", "A"]:
+                rank = 10
+            else:
+                rank = int(rank)
+            return rank
 
-            strightlist.sort()
-            for i in range(len(strightlist)-1):
-                if int(strightlist[i]) == int(strightlist[i+1] + 1):
+        straight_list = []
+        straight_list.append(checkRank(card1["rank"]))
+        straight_list.append(checkRank(card2["rank"]))
+
+        if len(straight_list) > 2:
+            for comcard_rank in comcards_ranks:
+                straight_list.append(checkRank(comcard_rank))
+
+            straight_list.sort()
+            for i in range(len(straight_list)-1):
+                if straight_list[i] == straight_list[i+1] - 1:
                     pass
                 else:
                     break
-            if len(strightlist) == i + 1:
-                return 2 * game_state["current_buy_in"]        
-
-
+            if len(straight_list) == i + 1:
+                return 2 * game_state["current_buy_in"]
 
         # Check if there is a flush
         flush_suit = None
@@ -71,12 +64,15 @@ class Player:
             if sum(other_card["rank"] == card["rank"] for other_card in cards + game_state["community_cards"]) == 3:
                 triple_rank = card["rank"]
                 break
-        if pair_rank:
+
+        if pair_rank and checkRank(pair_rank) <= 8:
+            return 0
+        elif pair_rank:
             if pair_rank in [card1["rank"], card2["rank"]]:
                 return (game_state["current_buy_in"] - game_state["players"][game_state["in_action"]]["bet"]) + 100
             else:
                 return 0
-        if flush_suit:
+        elif flush_suit:
             if card1["suit"] == flush_suit and card2["suit"] == flush_suit:
                 return 3 * game_state["current_buy_in"]
             else:
