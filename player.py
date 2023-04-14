@@ -29,6 +29,13 @@ class Player:
                 return 0
         elif len(two_pairs) > 1:
             return game_state["players"][game_state["in_action"]]["stack"]
-        elif game_state["current_buy_in"] > 500:
-            return 0
+        elif len(comcards_suits) <= 2:
+            if game_state["current_buy_in"] > 300:
+                return 0
+        elif len(comcards_suits) <= 3:
+            if game_state["current_buy_in"] > 100:
+                return 0
+        elif len(comcards_suits) <= 4:
+            if game_state["current_buy_in"] > 50:        
+                return 0
         return (game_state["current_buy_in"] - game_state["players"][game_state["in_action"]]["bet"])
