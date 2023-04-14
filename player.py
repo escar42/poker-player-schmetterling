@@ -5,9 +5,43 @@ class Player:
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
         card1 = cards[0]
         card2 = cards[1]
+        
         comcards_suits = []
-        for comcard_suits in game_state["community_cards"]:
-            comcards_suits.append(comcard_suits["suit"])
+        comcards_ranks = []
+
+        for comcard in game_state["community_cards"]:
+            comcards_suits.append(comcard["suit"])
+            comcards_ranks.append(comcard["rank"])
+
+            
+        #straight
+        def checkRank(rank):
+            if rank == "jogger"
+                rank = 11
+            if rank == "queen"
+                rank = 12
+            if rank == "king"
+                rank = 13
+            if rank == "ace"
+                rank = 14
+            return rank
+            
+        strightlist = []
+        strightlist.append(checkRank(card1["rank"]))
+        strightlist.append(checkRank(card2["rank"]))
+        for comcard_rank in comcards_ranks:
+            strightlist.append(checkRank(comcard_rank))
+           
+        strightlist.sort()
+        for i in range(5):
+            if strightlist[i+1] == strightlist[i] + 1:
+                pass
+            else:
+                break
+        if i == 4:
+            return game_state["players"][game_state["in_action"]]["stack"]
+
+
 
         # Check if there is a flush
         flush_suit = None
