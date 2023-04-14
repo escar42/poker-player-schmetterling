@@ -20,32 +20,32 @@ class Player:
                 pair_rank = card["rank"]
                 break
 
-        #straight
-        def checkRank(rank):
-            if rank == "J":
-                rank = 11
-            if rank == "Q":
-                rank = 12
-            if rank == "K":
-                rank = 13
-            if rank == "A":
-                rank = 14
-            return int(rank)
+        # #straight
+        # def checkRank(rank):
+        #     if rank == "J":
+        #         rank = 11
+        #     if rank == "Q":
+        #         rank = 12
+        #     if rank == "K":
+        #         rank = 13
+        #     if rank == "A":
+        #         rank = 14
+        #     return int(rank)
             
-        strightlist = []
-        strightlist.append(checkRank(card1["rank"]))
-        strightlist.append(checkRank(card2["rank"]))
-        for comcard_rank in comcards_ranks:
-            strightlist.append(checkRank(comcard_rank))
+        # strightlist = []
+        # strightlist.append(checkRank(card1["rank"]))
+        # strightlist.append(checkRank(card2["rank"]))
+        # for comcard_rank in comcards_ranks:
+        #     strightlist.append(checkRank(comcard_rank))
            
-        strightlist.sort()
-        for i in range(len(strightlist)-1):
-            if int(strightlist[i+1]) == int(strightlist[i]) + 1:
-                pass
-            else:
-                break
-        if i == 4:
-            return game_state["players"][game_state["in_action"]]["stack"]           
+        # strightlist.sort()
+        # for i in range(len(strightlist)-1):
+        #     if int(strightlist[i+1]) == int(strightlist[i]) + 1:
+        #         pass
+        #     else:
+        #         break
+        # if i == 4:
+        #     return game_state["players"][game_state["in_action"]]["stack"]           
 
 
 
