@@ -37,7 +37,7 @@ class Player:
         strightlist = []
         strightlist.append(checkRank(card1["rank"]))
         strightlist.append(checkRank(card2["rank"]))
-        if strightlist >= 2:
+        if len(strightlist) > 2:
             for comcard_rank in comcards_ranks:
                 strightlist.append(checkRank(comcard_rank))
 
