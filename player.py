@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "Schmetter 0.0.6"
+    VERSION = "Schmetter 0.0.7"
 
     def betRequest(self, game_state):
         cards = game_state["players"][game_state["in_action"]]["hole_cards"]
@@ -16,13 +16,13 @@ class Player:
             
         #straight
         def checkRank(rank):
-            if rank == "jogger"
+            if rank == "jogger":
                 rank = 11
-            if rank == "queen"
+            if rank == "queen":
                 rank = 12
-            if rank == "king"
+            if rank == "king":
                 rank = 13
-            if rank == "ace"
+            if rank == "ace":
                 rank = 14
             return rank
             
