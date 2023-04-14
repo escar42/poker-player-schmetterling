@@ -33,13 +33,13 @@ class Player:
             strightlist.append(checkRank(comcard_rank))
            
         strightlist.sort()
-        for i in range(5):
+        for i in range(len(strightlist)-1):
             if int(strightlist[i+1]) == int(strightlist[i]) + 1:
                 pass
             else:
                 break
         if i == 4:
-            return game_state["players"][game_state["in_action"]]["stack"]
+            return game_state["players"][game_state["in_action"]]["stack"]           
 
 
 
