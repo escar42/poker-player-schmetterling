@@ -65,11 +65,11 @@ class Player:
 
         if flush_suit:
             if card1["suit"] == flush_suit and card2["suit"] == flush_suit:
-                return game_state["players"][game_state["in_action"]]["stack"]
+                return 3 * game_state["current_buy_in"]
             else:
                 return 0
         elif len(two_pairs) > 1:
-            return game_state["players"][game_state["in_action"]]["stack"]
+            return int(2.5 * game_state["current_buy_in"])
         elif triple_rank:
             if triple_rank in [card1["rank"], card2["rank"]]:
                 return 2 * game_state["current_buy_in"]
