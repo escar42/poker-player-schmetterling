@@ -7,7 +7,7 @@ class Player:
         card1 = cards[0]
         card2 = cards[1]
         comcards_suits = []
-        for comcard_suits in game_state["community_cards"]
+        for comcard_suits in game_state["community_cards"]:
             comcards_suits.append(comcard_suits["suit"])
         
         if card1["suit"] == card2["suit"] or if card1["suit"] in comcards_suits or if card2[suit] in comcards_suits:
