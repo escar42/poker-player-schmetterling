@@ -16,13 +16,13 @@ class Player:
             
         #straight
         def checkRank(rank):
-            if rank == "jogger":
+            if rank == "J":
                 rank = 11
-            if rank == "queen":
+            if rank == "Q":
                 rank = 12
-            if rank == "king":
+            if rank == "K":
                 rank = 13
-            if rank == "ace":
+            if rank == "A":
                 rank = 14
             return rank
             
